@@ -10,7 +10,7 @@ Núcleo responde citando sus fuentes: marca la frase exacta que sale de cada doc
 
 ## Por qué es importante
 
-Una respuesta de IA vale lo que vale su fuente. Con el pasaje resaltado en ambos lados, revisar una cifra toma segundos. Esto resulta en confianza y seguridad para nuestros usuarios. Cada afirmación es fácil y rápidamente factcheckeable.
+Una respuesta de IA vale lo que vale su fuente. Con el pasaje resaltado en ambos lados, revisar una cifra toma segundos. Cada afirmación es fácil y rápidamente factcheckeable. Esto resulta en confianza y seguridad para nuestros usuarios.
 
 ## ¿Lo usan?
 
