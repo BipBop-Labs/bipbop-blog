@@ -1,10 +1,10 @@
 # *Jev*ification en Revi
 
-## ¿Qué es Jev y por qué me importa?
+## ¿Quién es Jev y por qué sale en mi feed?
 
 Jev es un modelo que lanzó hace poco, la semana del 18, entre empanadas, [TypeSafe AI](https://typesafe.ai/blog/introducing-system-one-models-and-jev), una startup de Diogo Almeida, que antes trabajaba en OpenAI.
 
-Tiene una gracia: a diferencia de los LLMs que ya tenemos, este es un modelo clasificador generalista. En el fondo, recibe inputs de texto y, en un tiempo ínfimo en comparación a lo que se demora un LLM en generar texto, toma una decisión que viene con un cierto grado de confianza que entrega el mismo modelo. TypeSafe habla de entre 70 y 500 milisegundos, contra 3 segundos o más de un LLM. Cuesta US$ 0,042 por millón de tokens de entrada y la salida es gratis.
+Tiene una gracia: a diferencia de los LLMs que ya tenemos, este es un modelo clasificador generalista, o System One Model, como lo llama TypeSafe. En el fondo, recibe inputs de texto y, en un tiempo ínfimo en comparación a lo que se demora un LLM en generar texto, toma una decisión que viene con un cierto grado de confianza que entrega el mismo modelo. TypeSafe habla de entre 70 y 500 milisegundos, contra 3 segundos o más de un LLM. Cuesta US$ 0,042 por millón de tokens de entrada y la salida es gratis.
 
 El desafío que existía antes con los LLMs, y bueno, que en verdad sigue existiendo, es que a veces tú quieres outputs de texto libre, y eso está bien, pero a veces necesitas que el output sea una elección dentro de una lista que ya existe, o un output estructurado dentro de algo que ya está definido.
 
