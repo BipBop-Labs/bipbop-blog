@@ -4,7 +4,7 @@ La semana del 18 (de septiembre), probablemente mientras te comias una empanada,
 
 ## ¿Quién es Jev?
 
-Jev es un modelo de decisión de [TypeSafe AI](https://typesafe.ai/blog/introducing-system-one-models-and-jev). Que a diferencia de un LLM en cambio de devolver texto. Devuelve una decisión, le pasas una lista de alternativas, te devuelve la más probable.
+Jev es un modelo de decisión de [TypeSafe AI](https://typesafe.ai/blog/introducing-system-one-models-and-jev). Que a diferencia de un LLM en cambio de devolver texto. Devuelve una decisión, le pasas una lista de alternativas, te devuelve la más probable. Le caben unos 32 mil tokens de texto por consulta, que es más o menos un libro corto como El Principito.
 
 [en el mismo estilo acá hacemos la comparativa para la tarea donde es util vs los llm] 
 
