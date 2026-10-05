@@ -1,0 +1,5 @@
+{
+  "authors": [{ "name": "Diego Valenzuela", "url": "https://datadiego.com" }],
+  "description": "Cada fact de nuestro agente viene citado y con un clic, el usuario abre el archivo original en la página donde está escrita.",
+  "draft": false
+}
