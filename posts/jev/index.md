@@ -1,6 +1,16 @@
 # *Jev*ification en Revi
 
-La semana del 18, entre empanadas, TypeSafe AI [lanzó Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev). No es un LLM: le das un estado y preguntas con opciones cerradas, y te devuelve la respuesta con su probabilidad. Nunca inventa una opción, responde en menos de un segundo y cuesta US$ 0,042 por millón de tokens de entrada. La salida es gratis.
+## ¿Qué es Jev y por qué me importa?
+
+Jev es un modelo que lanzó hace poco, la semana del 18, entre empanadas, [TypeSafe AI](https://typesafe.ai/blog/introducing-system-one-models-and-jev), una startup de Diogo Almeida, que antes trabajaba en OpenAI.
+
+Tiene una gracia: a diferencia de los LLMs que ya tenemos, este es un modelo clasificador generalista. En el fondo, recibe inputs de texto y, en un tiempo ínfimo en comparación a lo que se demora un LLM en generar texto, toma una decisión que viene con un cierto grado de confianza que entrega el mismo modelo. TypeSafe habla de entre 70 y 500 milisegundos, contra 3 segundos o más de un LLM. Cuesta US$ 0,042 por millón de tokens de entrada y la salida es gratis.
+
+El desafío que existía antes con los LLMs, y bueno, que en verdad sigue existiendo, es que a veces tú quieres outputs de texto libre, y eso está bien, pero a veces necesitas que el output sea una elección dentro de una lista que ya existe, o un output estructurado dentro de algo que ya está definido.
+
+Entonces, lo que viene a resolver este modelo, y todos los que han salido después, como [Clef](https://blog.cloudflare.com/clef-decision-models/) de Cloudflare y otros open source como [Laya, Nimble y Kev](https://www.deeplearning.ai/the-batch/models-built-to-do-one-thing-well), es que nos permiten hacer estas elecciones de manera muy rápida y a un nivel parecido al de los mejores LLMs de ahora mismo.
+
+## Dónde lo usamos en Revi
 
 En Revi, el agente toma muchas decisiones chicas que no necesitan un LLM: qué documento es cuál, qué fragmento de normativa sirve, qué herramienta usar. Ahí pusimos a Jev.
 
