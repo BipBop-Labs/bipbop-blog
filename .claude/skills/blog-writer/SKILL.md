@@ -31,13 +31,7 @@ redacción de un post ya escrito. Si no hay texto del autor, pídeselo.
 
 ## Procedimiento
 
-### 1. Guarda el dictado tal cual
-
-Agrega el dictado, sin tocarlo, al final de `dictados/<slug>.md` con la fecha.
-Es la fuente contra la que se revisa todo lo demás, y la única materia prima
-válida para la hoja de voz.
-
-### 2. Separa lo que es texto de lo que es encargo
+### 1. Separa lo que es texto de lo que es encargo
 
 En un dictado hay cuatro cosas mezcladas. Márcalas antes de editar:
 
@@ -55,7 +49,7 @@ En un dictado hay cuatro cosas mezcladas. Márcalas antes de editar:
 Si un encargo es ambiguo ("cita lo de Jeff") y el contexto no alcanza para
 saber a qué se refiere, pregunta antes de buscar.
 
-### 3. Edita el texto
+### 2. Edita el texto
 
 Lee [references/voz.md](references/voz.md) la primera vez en cada sesión. El
 resumen: **se borra y se puntúa, no se reescribe.**
@@ -82,7 +76,7 @@ No puedes:
 Los títulos de sección (`##`) salen de palabras del autor. Si no dio ninguno,
 propón uno corto y avísale.
 
-### 4. Revisa la voz contra el dictado
+### 3. Revisa la voz contra el dictado
 
 Antes de escribir en el archivo, compara tu texto con el dictado:
 
@@ -96,7 +90,7 @@ Antes de escribir en el archivo, compara tu texto con el dictado:
 
 Si algo falla, vuelve al dictado y borra menos. No lo arregles reescribiendo.
 
-### 5. Citas y verificación
+### 4. Citas y verificación
 
 Sigue [references/verificacion.md](references/verificacion.md). Las búsquedas
 de distintas afirmaciones son independientes: hazlas en paralelo.
@@ -110,7 +104,7 @@ No cambies una afirmación del autor porque la verificación salió mal. El text
 queda como lo dijo, con un `[TODO: ...]` al lado, y la corrección se la
 propones en el informe. El autor decide.
 
-### 6. Escribe y reporta
+### 5. Escribe y reporta
 
 Escribe la sección en `posts/<slug>/index.md`. Después dile al autor, en este
 orden:
@@ -129,7 +123,7 @@ revisaste y que calzan.
 
 - **Texto más "escrito" que el dictado.** Palabras más largas, menos "yo",
   menos conectores, frases de largo parejo. Pasa aunque trates de evitarlo: por
-  eso el paso 4 es una comparación y no una relectura.
+  eso el paso 3 es una comparación y no una relectura.
 - **Borrar una muletilla que significaba algo.** "Igual", "como", "onda", "o
   sea" a veces son relleno y a veces cambian lo que se dice. La prueba está en
   `references/voz.md`.
@@ -145,9 +139,8 @@ revisaste y que calzan.
 
 La sección está lista cuando:
 
-- el dictado quedó guardado en `dictados/<slug>.md`;
-- el paso 4 pasa completo;
+- el paso 3 pasa completo;
 - cada link del texto nuevo fue abierto y contiene lo que respalda;
 - cada afirmación verificable tiene veredicto, y las que no quedaron
   confirmadas tienen su `[TODO: ...]` en el post;
-- el autor recibió el informe del paso 6.
+- el autor recibió el informe del paso 5.

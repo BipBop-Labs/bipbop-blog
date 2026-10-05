@@ -103,7 +103,7 @@ Qué hacer:
 ## La hoja de voz
 
 Una por autor, en `voces/<autor>.md` dentro de esta skill. Se arma con
-dictados crudos, nunca con texto ya editado: si no, cada pasada se aleja un
+el dictado crudo de la conversación, nunca con texto ya editado: si no, cada pasada se aleja un
 poco más de la persona.
 
 ```markdown

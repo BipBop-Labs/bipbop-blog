@@ -68,5 +68,5 @@ con Claude Code, dictas o pegas lo que quieres contar y el agente:
 - busca las citas que pediste ("aquí cita tal cosa") y las deja enlazadas;
 - revisa los datos que diste y te avisa cuáles no calzan.
 
-Guarda cada dictado sin editar en `dictados/<post>.md`, y lo que aprende de
-cómo hablas en `.claude/skills/blog-writer/voces/`.
+Lo que aprende de cómo hablas lo guarda en
+`.claude/skills/blog-writer/voces/`.
