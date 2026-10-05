@@ -1,10 +1,16 @@
-# La mejor forma de _verificar_ lo que nos dice nuestro agente
+# Cómo logramos _factcheckear_ a nuestros agentes
 
 ## Qué es Núcleo
 
 Núcleo es el agente de inteligencia artificial de la Cámara Chilena de la Construcción (CChC). Está hecho para sus socios y colaboradores: le preguntas en lenguaje natural, en la web o por WhatsApp, y busca la respuesta en los documentos, estudios y datos del gremio. Informes de coyuntura, reglamentos, beneficios y cifras de la industria, en un solo lugar.
 
-Pero una respuesta de IA solo sirve si puedes confiar en ella. Por eso Núcleo responde citando sus fuentes: marca la frase exacta que sale de cada documento y, con un clic, te lleva a la página donde está escrita, con el mismo pasaje resaltado.
+Núcleo responde citando sus fuentes: marca la frase exacta que sale de cada documento y, con un clic, te lleva a la página donde está escrita, con el mismo pasaje resaltado.
+
+## We think this is the bare minimum
+
+Una respuesta de IA vale lo que vale su fuente. Con el pasaje resaltado en ambos lados, revisar una cifra toma segundos. Esto resulta en confianza y seguridad para nuestros usuarios. Cada afirmación es fácil y rápidamente factcheckeable.
+
+En bipbop creemos que la visibilidad y transparencia de lo que "está pasando detrás" es clave para ofrecer una UX satisfactoria. El hecho de que toda esta trazabilidad esté a un click de distancia nos acerca hacia una retención y engagement saludable con las plataformas que desarrollamos.
 
 ![Núcleo responde sobre la inversión en construcción 2026 con frases resaltadas y numeradas. Al hacer clic en la cita 1 se abre el informe en PDF en la página 14, con el mismo pasaje resaltado en naranja.](citas-resaltadas.gif "Pregunta, respuesta con citas y verificación en el informe original. Las cifras del ejemplo son ilustrativas.")
 
@@ -36,35 +42,60 @@ citations.push({
 });
 ```
 
-Dos detalles que aprendimos en el camino. Primero, la página viene desde 0 y todos los visores cuentan desde 1. Segundo, el mismo PDF puede estar en varias carpetas, y sus chunks vuelven con el mismo vector y exactamente el mismo score. Deduplicamos por `score + página` para que las copias no se coman los cupos de resultados.
+Ese `+ 1` es el primer detalle que aprendimos en el camino. Bedrock numera las páginas desde 0: la portada de un PDF es la página 0. Los visores de PDF, y cualquier persona, cuentan desde 1. Sin sumar 1, cada cita abría el documento una página antes de la correcta, justo donde el pasaje no estaba.
 
-Hasta acá, Bedrock hizo el trabajo pesado. Lo que nos entrega es una lista de pasajes con su archivo y su página. Convertir eso en algo que una persona realmente revise es otro problema.
+El segundo detalle son los duplicados. Un mismo informe suele estar subido en varias carpetas de SharePoint, por ejemplo la del área que lo publica y una carpeta compartida. La Knowledge Base indexa cada copia por separado, así que una búsqueda puede devolver el mismo pasaje dos o tres veces. Como usamos solo los 8 mejores resultados de cada búsqueda, las copias ocupaban cupos que deberían ser de otros documentos, y a veces dejaban fuera la edición más reciente del informe.
+
+Para descartarlas necesitábamos una llave que identificara "el mismo pasaje". El texto no sirve, porque BDA procesa cada copia por separado y no siempre la escribe igual. Pero el contenido de las copias es el mismo, entonces su embedding también lo es, y Bedrock les asigna exactamente el mismo score. Usamos `score + página` como llave: si ya vimos ese par, el resultado es una copia y lo saltamos.
+
+Con esto, el backend ya está resuelto: de cada respuesta sabemos de qué archivo y de qué página salió cada dato. Pero eso solo no le sirve a quien lee. Una lista de archivos al final de la respuesta no dice qué frase sale de cuál, y nadie va a abrir un PDF de 48 páginas para buscar una cifra. Ahí empieza el trabajo de UX.
 
 ## Lo difícil es la UX
 
 ### Un número por fuente
 
-El prompt le pide al modelo citar con `[n]` justo después de la afirmación, donde `n` es el número de la fuente. Numeramos por documento, no por chunk: si tres pasajes salen del mismo informe, los tres son `[1]`. Para quien lee, "fuente 1" es un documento, no un trozo de texto.
+El prompt le pide al modelo citar con `[n]` justo después de la afirmación, donde `n` es el número de la fuente. Numeramos por documento en vez de por chunk, porque si tres pasajes salen del mismo informe, mostrar `[1]`, `[2]` y `[3]` haría pensar que hay tres fuentes distintas. Con la numeración por documento, los tres son `[1]`: para quien lee, "fuente 1" es un documento, no un trozo de texto.
 
 ### Del `[n]` a la frase resaltada
 
 Un `[3]` al final de un párrafo no dice qué parte del párrafo respalda. Así que no mostramos el marcador: resaltamos la afirmación. Un plugin de remark recorre el markdown de la respuesta y, cuando encuentra un `[n]`, envuelve todo lo que hay desde el final de la frase anterior hasta el marcador. Si vienen seguidos (`[1][2]`), la misma frase queda con dos fuentes.
 
-La parte delicada es saber dónde termina una frase:
+La parte delicada es saber dónde termina la frase anterior. Uno pensaría que basta con buscar el último punto, signo de exclamación o de pregunta:
 
 ```ts
-// Puntuación seguida de espacio o fin de texto. El lookahead evita cortar
-// en el separador de miles ("18.538") y en decimales.
+const SENTENCE_END = /[.!?]/g;
+```
+
+Hasta que el agente responde con una cifra chilena, donde el punto separa los miles:
+
+```
+En 2025 se vendieron 18.538 viviendas [1].
+
+/[.!?]/        →  resalta "538 viviendas"
+SENTENCE_END   →  resalta "En 2025 se vendieron 18.538 viviendas"
+```
+
+La primera regex ve el punto de "18.538" como fin de frase y el resaltado parte en la mitad del número. Y en un agente que habla de viviendas, permisos y metros cuadrados, eso pasa en casi todas las respuestas. La versión que usamos:
+
+```ts
 const SENTENCE_END = /[.!?…:]["»)\]]?(?=\s|$)|\n/g;
 ```
 
-En un agente que responde con cifras chilenas, "18.538 viviendas" aparece todo el tiempo. Sin ese lookahead, el resaltado partía en la mitad del número.
+- `(?=\s|$)`: el punto solo cuenta si después viene un espacio o el final del texto. En "18.538" viene un 5, así que no corta. Lo mismo para un decimal escrito con punto, como "3.2".
+- `["»)\]]?`: deja pasar una comilla o un paréntesis de cierre después del punto, como en `(ver informe).`
+- `:` y `\n`: los dos puntos y los saltos de línea también cortan. Sin eso, un título en negrita como "**Tendencia histórica:**" quedaba pegado al resaltado de la frase de abajo.
 
 ### Del resaltado a la página exacta
 
 Al hacer clic se abre el documento. Para PDFs lo renderizamos con pdf.js, saltamos a la página que dio Bedrock y resaltamos el pasaje en el mismo naranja que en la respuesta, para que se lea como una sola cosa.
 
-El problema: el texto del chunk no coincide carácter a carácter con el texto del PDF. BDA agrega markdown (`**`, `#`, tablas) y pdf.js entrega el texto partido en ítems con su propio espaciado. Buscar el pasaje completo no funciona. Lo que hacemos es normalizar los dos lados y marcar cada ítem de la página que aparezca dentro del chunk:
+Para eso hay que encontrar el pasaje dentro del PDF, y uno pensaría que basta con buscar el texto del chunk en la página. No funciona, porque el texto del chunk no coincide carácter a carácter con el del PDF:
+
+- BDA agrega markdown: un título en el PDF llega como `**La inversión en construcción**`.
+- pdf.js no entrega la página como un texto continuo, sino partida en ítems (más o menos una línea o un trozo de línea cada uno), con su propio espaciado.
+- Algunos PDFs guardan las tildes descompuestas: la "ó" de "construcción" viene como una "o" seguida de una tilde suelta. En pantalla se ven idénticas, pero para JavaScript son strings distintos.
+
+Así que en vez de buscar el pasaje completo, recorremos los ítems de la página y marcamos cada uno que aparezca dentro del chunk. Antes de comparar, normalizamos los dos lados:
 
 ```ts
 function normalize(text: string): string {
@@ -77,6 +108,18 @@ function normalize(text: string): string {
     .trim();
 }
 ```
+
+Con el pasaje de la demo:
+
+```
+chunk de Bedrock:  "**La inversión en construcción** crecería 3,2% real anual en 2026"
+ítem de pdf.js:    "construcción  crecería"   (doble espacio, ó descompuesta)
+
+chunk.includes(ítem)                        →  false
+normalize(chunk).includes(normalize(ítem))  →  true   ("construccion creceria")
+```
+
+`normalize("NFD")` separa cada letra con tilde en la letra base más la tilde, el `replace` siguiente borra las tildes, y así "ó" compuesta y "ó" descompuesta quedan ambas como "o". Después se van los símbolos de markdown y los espacios repetidos.
 
 Los ítems de menos de 8 caracteres ("de", "2025", "%") se ignoran: aparecen en cualquier chunk y resaltarían media página suelta. Y cuando el documento no trae número de página, recorremos el PDF y abrimos la página con más texto coincidente.
 
@@ -96,10 +139,6 @@ Y quienes abren citas vuelven más. De las personas que recibieron respuestas ci
 
 Son muestras chicas y es correlación, no causa: quien ya usa mucho Núcleo probablemente también verifica más. Pero va en la dirección que esperábamos.
 
-## We think this is the bare minimum
-
-Una respuesta de IA vale lo que vale su fuente. Con el pasaje resaltado en ambos lados, revisar una cifra toma segundos. Esto resulta en confianza y seguridad para nuestros usuarios. Cada afirmación es fácil y rápidamente factcheckeable.
-
-En bipbop creemos que la visibilidad y transparencia de lo que "está pasando detrás" es clave para ofrecer una UX satisfactoria, El hecho de que toda esta trazabilidad esté a un click de distancia nos acerca hacia una retención y engagement saludable con las plataformas que desarrollamos.
+## Pruébalo
 
 No solo socios y colaboradores de la CChC pueden acceder a Núcleo, sino que el público general puede probarlo para comprender mejor la información pública que la Cámara dispone a la ciudadanía en general, puedes probarlo en [nucleo.cchc.cl](https://nucleo.cchc.cl). Si una cita no te lleva al lugar correcto, se marca con el pulgar abajo y la revisamos.
