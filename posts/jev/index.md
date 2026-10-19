@@ -20,6 +20,8 @@ En Revi, obviamente, no nos queríamos quedar atrás. Y el patrón es fácil de 
 
 Un expediente de permiso de edificación trae decenas de archivos. Para empezar, Revi necesita saber cuál es la solicitud (el formulario de la solicitud, un estándar del Minvu) y cuál es el acta de observaciones de la DOM (la muni). Antes se lo preguntábamos a Gemini. Ahora Jev elige entre los nombres de los archivos, más una opción «ninguno». Tarda unos 0,4 segundos, antes aprox 3 segundos, y cuesta US$ 0,00003 por expediente. Si falla, responde Gemini como antes.
 
+![Jev recibe la pregunta "¿Cuál de estos archivos es la solicitud de permiso de edificación?" y reparte la probabilidad entre los archivos: solicitud.pdf 0,91, acta_dom.pdf 0,05, plano_1.pdf 0,03 y ninguno 0,01.](como-elige-jev.png "Nombres de archivo y valores ilustrativos.")
+
 ### Filtrar la normativa
 
 Cuando alguien pregunta por normativa, el agente busca en una base vectorial con la LGUC, la OGUC, los planes reguladores y las DDU (circulares). Como sabrás, esto es un RAG de toda la vida (3 años). Cada búsqueda trae varios fragmentos y todos entran al contexto, sirvan o no. La entrada del LLM es casi todo nuestro gasto: en nuestros evals, 4,3 millones de tokens de entrada contra 45 mil de salida.
