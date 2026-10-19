@@ -1,16 +1,16 @@
 # La mejor UX para revisar ==*agent*== *citations*
 
-Le preguntas algo a un agente, te tira una cifra y abajo te deja el link a un PDF. ¿Cuántas veces has abierto ese PDF para revisar si la cifra está ahí? Nosotros tampoco. Y si tiene 48 páginas, menos.
+Si has hecho un agente con RAG ya conoces el problema. El agente responde con una cifra, abajo poneel nombre del documento de donde la sacó, y nadie (ni siquiera nosotros) abre un informe de 48 páginas para ver si la cifra de verdad está ahí.
 
-Lo bueno es que la parte difícil ya está resuelta. Bedrock te devuelve, junto a cada pasaje, de qué archivo y de qué página salió. No hay que inventar nada. Lo que falta es que revisar no dé lata: que un clic te lleve a la página exacta, con la frase marcada en el mismo naranja que en la respuesta.
+Lo bacán es que con Bedrock la mitad del trabajo viene hecha. Cada pasaje que te devuelve la Knowledge Base trae el archivo y la página de donde salió, así que la cita en sí no hay que inventarla. Lo que nos tocó a nosotros fue la UX, que revisar una cita sea un clic y te deje en la página exacta del PDF con la frase marcada en el mismo naranja que en la respuesta.
 
-Eso hicimos en Núcleo, el agente de la Cámara Chilena de la Construcción (CChC). Y la gente lo usa: 3 de cada 10 sesiones abren al menos una cita.
+Lo hicimos para Núcleo, el agente de la Cámara Chilena de la Construcción (CChC), y desde agosto aprox 3 de cada 10 sesiones con respuestas citadas abren al menos una cita.
 
 ![Núcleo responde sobre la inversión en construcción 2026 con frases resaltadas y numeradas. Al hacer clic en la cita 1 se abre el informe en PDF en la página 14, con el mismo pasaje resaltado en naranja.](citas-resaltadas.gif "Pregunta, respuesta con citas y verificación en el informe original. Las cifras del ejemplo son ilustrativas.")
 
 ## Qué es Núcleo
 
-Núcleo es *yet another AI agent*, pero acotado a lo que sabe la **Cámara Chilena de la Construcción** (CChC): informes de coyuntura, reglamentos, beneficios y cifras de la industria. Le preguntas en lenguaje natural, por la web o por WhatsApp, y te responde con los documentos, estudios y datos del gremio. Está hecho para sus socios y colaboradores.
+Núcleo es otro agente de IA más (sí, *yet another AI agent*), con la diferencia de que solo sabe lo que hay en los documentos de la Cámara. Está pensado para sus socios y colaboradores, que le preguntan por la web o por WhatsApp cosas como cuánto va a crecer la inversión en construcción el próximo año o qué beneficios tienen por ser socios, y les responde con los informes, estudios y datos del gremio.
 
 ## ¿Lo usan?
 
