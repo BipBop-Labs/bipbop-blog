@@ -53,15 +53,27 @@ Markdown normal (tablas, bloques de código, listas, citas).
 - `date`: opcional (`"2026-09-22"`). Sin esto, la fecha es la del primer
   commit de `index.md`.
 
-## Vista previa local
+## Escribir en la página
 
-En el repo del sitio (`bipbop.cl`), apuntando a una copia local de este repo:
+Con este repo al lado del sitio (`bipbop/bipbop-blog` y `bipbop/bipbop.cl`),
+en el repo del sitio:
 
 ```
-BLOG_DIR=../bipbop-blog pnpm dev
+pnpm dev
 ```
 
-Así los cambios se ven al recargar, sin esperar la caché.
+Si la copia está en otro lado: `BLOG_DIR=/ruta/al/blog pnpm dev`.
+
+Abre `localhost:3000/blog/<slug>` y escribe directo sobre el post: el título,
+la bajada y el texto se editan ahí mismo, tal como se van a ver. Se guarda
+solo en `index.md` y `metadata.json` (abajo a la derecha dice si guardó;
+`Ctrl+S` guarda al tiro). Después, commit y push como siempre.
+
+- `Ctrl+B` y `Ctrl+I` dan negrita y cursiva.
+- También se puede escribir markdown en un párrafo (`## Sección`, `- lista`,
+  `[enlace](https://...)`, ` ``` `): al salir del párrafo se convierte.
+- Solo cambian en el archivo los bloques que tocaste; el resto queda igual.
+- El índice lateral se actualiza al recargar.
 
 ## Escribir con un agente
 
