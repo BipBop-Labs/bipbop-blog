@@ -6,8 +6,11 @@ desplegar nada. Los cambios tardan hasta 5 minutos en verse.
 
 ## Un post
 
-Una carpeta por post dentro de `posts/`. El nombre de la carpeta es la URL
-(`posts/jev/` se ve en `bipbop.cl/blog/jev`), en minúsculas y con guiones.
+Una carpeta por post dentro de `posts/`, en minúsculas y con guiones. La URL
+sale del título (`# La mejor UX` se ve en `bipbop.cl/blog/la-mejor-ux`); la
+del nombre de la carpeta también sirve y redirige a esa. Lo normal es que la
+carpeta se llame igual que la URL: al editar en la página se renombra sola.
+Ojo: cambiar el título de un post publicado cambia su URL.
 
 ```
 posts/jev/
@@ -22,6 +25,7 @@ Markdown normal (tablas, bloques de código, listas, citas).
 
 - El primer `# Título` es el título del post. Lo que vaya en *cursiva* dentro
   del título sale en verde.
+- `==así==` sale en el verde de BipBop, sin cursiva, en el título o el texto.
 - Cada `## Sección` aparece en el índice lateral y se puede enlazar.
 - Las imágenes van con ruta relativa: `![Texto alternativo](grafico.png)`.
   Con un título entre comillas se muestra como pie de foto:
@@ -69,7 +73,8 @@ la bajada y el texto se editan ahí mismo, tal como se van a ver. Se guarda
 solo en `index.md` y `metadata.json` (abajo a la derecha dice si guardó;
 `Ctrl+S` guarda al tiro). Después, commit y push como siempre.
 
-- `Ctrl+B` y `Ctrl+I` dan negrita y cursiva.
+- `Ctrl+B` y `Ctrl+I` dan negrita y cursiva. Clic derecho, en el título o el
+  texto, abre un menú de formato (con Shift, el del navegador).
 - También se puede escribir markdown en un párrafo (`## Sección`, `- lista`,
   `[enlace](https://...)`, ` ``` `): al salir del párrafo se convierte.
 - Solo cambian en el archivo los bloques que tocaste; el resto queda igual.

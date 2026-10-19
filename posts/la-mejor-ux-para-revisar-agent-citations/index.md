@@ -1,8 +1,8 @@
-# Cómo logramos _factcheckear_ a nuestros agentes
+# La mejor UX para revisar ==*agent*== *citations*
 
 ## Qué es Núcleo
 
-Núcleo es el agente de inteligencia artificial de la Cámara Chilena de la Construcción (CChC). Está hecho para sus socios y colaboradores: le preguntas en lenguaje natural, en la web o por WhatsApp, y busca la respuesta en los documentos, estudios y datos del gremio. Informes de coyuntura, reglamentos, beneficios y cifras de la industria, en un solo lugar.
+Núcleo es el agente interno de inteligencia artificial de la **Cámara** **Chilena de la Construcción** (CChC). Está hecho para sus socios y colaboradores: le puedes hacer preguntas en lenguaje natural, en la web o por WhatsApp, y busca la respuesta en los documentos, estudios y datos del gremio. Informes de coyuntura, reglamentos, beneficios y cifras de la industria, en un solo lugar.
 
 Núcleo responde citando sus fuentes: marca la frase exacta que sale de cada documento y, con un clic, te lleva a la página donde está escrita, con el mismo pasaje resaltado.
 
@@ -14,7 +14,7 @@ Una respuesta de IA vale lo que vale su fuente. Con el pasaje resaltado en ambos
 
 ## ¿Lo usan?
 
-Desde que lanzamos los resaltados el 6 de agosto, PostHog registra cada clic en una cita. Sacando al equipo:
+Desde que lanzamos los resaltados el 6 de agosto, PostHog registra cada clic en una cita.
 
 ![3 de cada 10 sesiones con respuestas citadas abren al menos una cita: 23 de 80 sesiones.](grafico-sesiones.png)
 
@@ -54,46 +54,9 @@ citations.push({
 
 Ese `+ 1` es el primer detalle que aprendimos en el camino. Bedrock numera las páginas desde 0: la portada de un PDF es la página 0. Los visores de PDF, y cualquier persona, cuentan desde 1. Sin sumar 1, cada cita abría el documento una página antes de la correcta, justo donde el pasaje no estaba.
 
-El segundo detalle son los duplicados. Un mismo informe suele estar subido en varias carpetas de SharePoint, por ejemplo la del área que lo publica y una carpeta compartida. La Knowledge Base indexa cada copia por separado, así que una búsqueda puede devolver el mismo pasaje dos o tres veces. Como usamos solo los 8 mejores resultados de cada búsqueda, las copias ocupaban cupos que deberían ser de otros documentos, y a veces dejaban fuera la edición más reciente del informe.
-
-Para descartarlas necesitábamos una llave que identificara "el mismo pasaje". El texto no sirve, porque BDA procesa cada copia por separado y no siempre la escribe igual. Pero el contenido de las copias es el mismo, entonces su embedding también lo es, y Bedrock les asigna exactamente el mismo score. Usamos `score + página` como llave: si ya vimos ese par, el resultado es una copia y lo saltamos.
-
-Con esto, el backend ya está resuelto: de cada respuesta sabemos de qué archivo y de qué página salió cada dato. Pero eso solo no le sirve a quien lee. Una lista de archivos al final de la respuesta no dice qué frase sale de cuál, y nadie va a abrir un PDF de 48 páginas para buscar una cifra. Ahí empieza el trabajo de UX.
+Con esto, el backend ya está resuelto: de cada respuesta sabemos de qué archivo y de qué página salió cada dato. Nadie va a abrir un PDF de 48 páginas para buscar una cifra. Ahí empieza el trabajo de UX.
 
 ## Lo difícil es la UX
-
-### Un número por fuente
-
-El prompt le pide al modelo citar con `[n]` justo después de la afirmación, donde `n` es el número de la fuente. Numeramos por documento en vez de por chunk, porque si tres pasajes salen del mismo informe, mostrar `[1]`, `[2]` y `[3]` haría pensar que hay tres fuentes distintas. Con la numeración por documento, los tres son `[1]`: para quien lee, "fuente 1" es un documento, no un trozo de texto.
-
-### Del `[n]` a la frase resaltada
-
-Un `[3]` al final de un párrafo no dice qué parte del párrafo respalda. Así que no mostramos el marcador: resaltamos la afirmación. Un plugin de remark recorre el markdown de la respuesta y, cuando encuentra un `[n]`, envuelve todo lo que hay desde el final de la frase anterior hasta el marcador. Si vienen seguidos (`[1][2]`), la misma frase queda con dos fuentes.
-
-La parte delicada es saber dónde termina la frase anterior. Uno pensaría que basta con buscar el último punto, signo de exclamación o de pregunta:
-
-```ts
-const SENTENCE_END = /[.!?]/g;
-```
-
-Hasta que el agente responde con una cifra chilena, donde el punto separa los miles:
-
-```
-En 2025 se vendieron 18.538 viviendas [1].
-
-/[.!?]/        →  resalta "538 viviendas"
-SENTENCE_END   →  resalta "En 2025 se vendieron 18.538 viviendas"
-```
-
-La primera regex ve el punto de "18.538" como fin de frase y el resaltado parte en la mitad del número. Y en un agente que habla de viviendas, permisos y metros cuadrados, eso pasa en casi todas las respuestas. La versión que usamos:
-
-```ts
-const SENTENCE_END = /[.!?…:]["»)\]]?(?=\s|$)|\n/g;
-```
-
-- `(?=\s|$)`: el punto solo cuenta si después viene un espacio o el final del texto. En "18.538" viene un 5, así que no corta. Lo mismo para un decimal escrito con punto, como "3.2".
-- `["»)\]]?`: deja pasar una comilla o un paréntesis de cierre después del punto, como en `(ver informe).`
-- `:` y `\n`: los dos puntos y los saltos de línea también cortan. Sin eso, un título en negrita como "**Tendencia histórica:**" quedaba pegado al resaltado de la frase de abajo.
 
 ### Del resaltado a la página exacta
 
@@ -133,14 +96,14 @@ normalize(chunk).includes(normalize(ítem))  →  true   ("construccion creceria
 
 Los ítems de menos de 8 caracteres ("de", "2025", "%") se ignoran: aparecen en cualquier chunk y resaltarían media página suelta. Y cuando el documento no trae número de página, recorremos el PDF y abrimos la página con más texto coincidente.
 
-No es perfecto. Es coincidencia por contención, no fuzzy: si el PDF corta una palabra a mitad de ítem, ese trozo no se resalta. En la práctica el pasaje se ve igual, y alinear el texto con Levenshtein queda para cuando se note.
+No es perfecto. Es coincidencia por contención, no fuzzy: si el PDF corta una palabra a mitad de ítem, ese trozo no se resalta. En la práctica el pasaje se ve igual, y a futuro podríamos alinear el texto con algo como la [distancia Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance) si lo llegasemos a necesitar.
 
 Además de PDFs, los Word, Excel y PowerPoint se abren en vista previa, y cuando una cifra sale de una consulta SQL a la base de datos del Área de Estudios, esa consulta también queda citada.
 
-## We think this is the bare minimum
+## Pensámos que esto es lo mínimo
 
 En bipbop creemos que la visibilidad y transparencia de lo que "está pasando detrás" es clave para ofrecer una UX satisfactoria. El hecho de que toda esta trazabilidad esté a un click de distancia nos acerca hacia una retención y engagement saludable con las plataformas que desarrollamos.
 
 ## Pruébalo
 
-No solo socios y colaboradores de la CChC pueden acceder a Núcleo, sino que el público general puede probarlo para comprender mejor la información pública que la Cámara dispone a la ciudadanía en general, puedes probarlo en [nucleo.cchc.cl](https://nucleo.cchc.cl). Si una cita no te lleva al lugar correcto, se marca con el pulgar abajo y la revisamos.
+No solo socios y colaboradores de la CChC pueden acceder a Núcleo, sino que el público general puede probarlo para comprender mejor la información pública que la Cámara dispone a la ciudadanía en general, puedes probarlo en [nucleo.cchc.cl](https://nucleo.cchc.cl). Si una cita no te lleva al lugar correcto, marca el botón de pulgar abajo y la revisamos asap.
