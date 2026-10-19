@@ -10,7 +10,7 @@ Eso hicimos en Núcleo, el agente de la Cámara Chilena de la Construcción (CCh
 
 ## Qué es Núcleo
 
-Núcleo es el agente interno de inteligencia artificial de la **Cámara** **Chilena de la Construcción** (CChC). Está hecho para sus socios y colaboradores: le puedes hacer preguntas en lenguaje natural, en la web o por WhatsApp, y busca la respuesta en los documentos, estudios y datos del gremio. Informes de coyuntura, reglamentos, beneficios y cifras de la industria, en un solo lugar.
+Núcleo es *yet another AI agent*, pero acotado a lo que sabe la **Cámara Chilena de la Construcción** (CChC): informes de coyuntura, reglamentos, beneficios y cifras de la industria. Le preguntas en lenguaje natural, por la web o por WhatsApp, y te responde con los documentos, estudios y datos del gremio. Está hecho para sus socios y colaboradores.
 
 ## ¿Lo usan?
 
