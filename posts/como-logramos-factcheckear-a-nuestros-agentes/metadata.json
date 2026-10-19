@@ -1,5 +1,6 @@
 {
   "authors": [{ "name": "Diego Valenzuela", "url": "https://datadiego.com" }],
   "description": "Sabemos el lugar exacto de donde sacó cada respuesta.",
-  "date": "2026-10-05"
+  "date": "2026-10-05",
+  "draft": true
 }
