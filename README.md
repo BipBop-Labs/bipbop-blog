@@ -27,6 +27,10 @@ Markdown normal (tablas, bloques de código, listas, citas).
   Con un título entre comillas se muestra como pie de foto:
   `![Texto alternativo](grafico.png "Pie de foto")`. También sirven `.mp4`
   y `.webm`.
+- Los diagramas van en un bloque ` ```mermaid ` ([sintaxis](https://mermaid.js.org/intro/syntax-reference.html))
+  y se dibujan con los colores del sitio. Para destacar un nodo en verde:
+  `classDef jev fill:#e3ebd9,stroke:#3d7a3a,color:#2f5f2d` y `class nodo jev`.
+  Si el diagrama tiene un error de sintaxis, se muestra como texto.
 - Lo que falta confirmar antes de publicar se escribe `[TODO: qué falta]` y
   sale marcado en rojo.
 - El HTML suelto no se interpreta: se muestra como texto.
