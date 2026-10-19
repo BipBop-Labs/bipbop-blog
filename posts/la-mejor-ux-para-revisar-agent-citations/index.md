@@ -1,16 +1,16 @@
 # La mejor UX para revisar ==*agent*== *citations*
 
-## Qué es Núcleo
+Le preguntas algo a un agente, te tira una cifra y abajo te deja el link a un PDF. ¿Cuántas veces has abierto ese PDF para revisar si la cifra está ahí? Nosotros tampoco. Y si tiene 48 páginas, menos.
 
-Núcleo es el agente interno de inteligencia artificial de la **Cámara** **Chilena de la Construcción** (CChC). Está hecho para sus socios y colaboradores: le puedes hacer preguntas en lenguaje natural, en la web o por WhatsApp, y busca la respuesta en los documentos, estudios y datos del gremio. Informes de coyuntura, reglamentos, beneficios y cifras de la industria, en un solo lugar.
+Lo bueno es que la parte difícil ya está resuelta. Bedrock te devuelve, junto a cada pasaje, de qué archivo y de qué página salió. No hay que inventar nada. Lo que falta es que revisar no dé lata: que un clic te lleve a la página exacta, con la frase marcada en el mismo naranja que en la respuesta.
 
-Núcleo responde citando sus fuentes: marca la frase exacta que sale de cada documento y, con un clic, te lleva a la página donde está escrita, con el mismo pasaje resaltado.
+Eso hicimos en Núcleo, el agente de la Cámara Chilena de la Construcción (CChC). Y la gente lo usa: 3 de cada 10 sesiones abren al menos una cita.
 
 ![Núcleo responde sobre la inversión en construcción 2026 con frases resaltadas y numeradas. Al hacer clic en la cita 1 se abre el informe en PDF en la página 14, con el mismo pasaje resaltado en naranja.](citas-resaltadas.gif "Pregunta, respuesta con citas y verificación en el informe original. Las cifras del ejemplo son ilustrativas.")
 
-## Por qué es importante
+## Qué es Núcleo
 
-Una respuesta de IA vale lo que vale su fuente. Con el pasaje resaltado en ambos lados, revisar una cifra toma segundos. Cada afirmación es fácil y rápidamente factcheckeable. Esto resulta en confianza y seguridad para nuestros usuarios.
+Núcleo es el agente interno de inteligencia artificial de la **Cámara** **Chilena de la Construcción** (CChC). Está hecho para sus socios y colaboradores: le puedes hacer preguntas en lenguaje natural, en la web o por WhatsApp, y busca la respuesta en los documentos, estudios y datos del gremio. Informes de coyuntura, reglamentos, beneficios y cifras de la industria, en un solo lugar.
 
 ## ¿Lo usan?
 
@@ -23,8 +23,6 @@ Y quienes abren citas vuelven más. De las personas que recibieron respuestas ci
 ![Volvieron en una semana posterior: 37,5 % de quienes abrieron una cita (6 de 16) contra 18,8 % de quienes nunca abrieron una (6 de 32).](grafico-retorno.png)
 
 Son muestras chicas y es correlación, no causa: quien ya usa mucho Núcleo probablemente también verifica más. Pero va en la dirección que esperábamos.
-
-Ahora, cómo está hecho: la parte que Bedrock nos regala y la parte que tuvimos que resolver nosotros, que es casi toda UX.
 
 ## Bedrock te da la cita casi gratis
 
@@ -54,7 +52,7 @@ citations.push({
 
 Ese `+ 1` es el primer detalle que aprendimos en el camino. Bedrock numera las páginas desde 0: la portada de un PDF es la página 0. Los visores de PDF, y cualquier persona, cuentan desde 1. Sin sumar 1, cada cita abría el documento una página antes de la correcta, justo donde el pasaje no estaba.
 
-Con esto, el backend ya está resuelto: de cada respuesta sabemos de qué archivo y de qué página salió cada dato. Nadie va a abrir un PDF de 48 páginas para buscar una cifra. Ahí empieza el trabajo de UX.
+Con esto, el backend ya está resuelto: de cada respuesta sabemos de qué archivo y de qué página salió cada dato. Ahí empieza el trabajo de UX.
 
 ## Lo difícil es la UX
 
@@ -96,14 +94,14 @@ normalize(chunk).includes(normalize(ítem))  →  true   ("construccion creceria
 
 Los ítems de menos de 8 caracteres ("de", "2025", "%") se ignoran: aparecen en cualquier chunk y resaltarían media página suelta. Y cuando el documento no trae número de página, recorremos el PDF y abrimos la página con más texto coincidente.
 
-No es perfecto. Es coincidencia por contención, no fuzzy: si el PDF corta una palabra a mitad de ítem, ese trozo no se resalta. En la práctica el pasaje se ve igual, y a futuro podríamos alinear el texto con algo como la [distancia Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance) si lo llegasemos a necesitar.
+No es perfecto. Es coincidencia por contención, no fuzzy: si el PDF corta una palabra a mitad de ítem, ese trozo no se resalta. En la práctica el pasaje se ve igual, y a futuro podríamos alinear el texto con algo como la [distancia Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance) si lo llegáramos a necesitar.
 
 Además de PDFs, los Word, Excel y PowerPoint se abren en vista previa, y cuando una cifra sale de una consulta SQL a la base de datos del Área de Estudios, esa consulta también queda citada.
 
-## Pensámos que esto es lo mínimo
+## Pensamos que esto es lo mínimo
 
-En bipbop creemos que la visibilidad y transparencia de lo que "está pasando detrás" es clave para ofrecer una UX satisfactoria. El hecho de que toda esta trazabilidad esté a un click de distancia nos acerca hacia una retención y engagement saludable con las plataformas que desarrollamos.
+En BipBop creemos que la visibilidad y transparencia de lo que "está pasando detrás" es clave para ofrecer una UX satisfactoria. El hecho de que toda esta trazabilidad esté a un click de distancia nos acerca hacia una retención y engagement saludable con las plataformas que desarrollamos.
 
 ## Pruébalo
 
-No solo socios y colaboradores de la CChC pueden acceder a Núcleo, sino que el público general puede probarlo para comprender mejor la información pública que la Cámara dispone a la ciudadanía en general, puedes probarlo en [nucleo.cchc.cl](https://nucleo.cchc.cl). Si una cita no te lleva al lugar correcto, marca el botón de pulgar abajo y la revisamos asap.
+Núcleo no es solo para socios de la CChC: cualquiera puede probarlo para entender mejor la información pública de la Cámara en [nucleo.cchc.cl](https://nucleo.cchc.cl). Si una cita no te lleva al lugar correcto, marca el botón de pulgar abajo y la revisamos asap.
