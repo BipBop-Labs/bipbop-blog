@@ -43,6 +43,8 @@ flowchart TB
   class b3 jev
 ```
 
+![Una búsqueda real en el PRC de Puerto Varas para "¿Cuál es la altura máxima de edificación en Puerto Varas?" trae 10 fragmentos. Jev deja pasar 5 (zonas del plan 0,97, normas de edificación 0,96, normas de la zona ZEC 0,92, índice de artículos 0,34 y antejardines 0,26) y descarta los otros 5, con puntajes entre 0,14 y 0,03.](jev-filtra-busqueda.png "Una búsqueda real con el filtro de Revi. Pasan los fragmentos con 0,2 o más.")
+
 En 20 preguntas de Puerto Varas, **los tokens de entrada bajaron 43 % y el costo 38 %**, con prácticamente la misma tasa de aprobación: 18,5 de 20 contra 19. Donde más se filtra es en los planes reguladores (a.k.a. PRC): de diez fragmentos por búsqueda, suelen servir dos.
 
 ## Lo que viene
