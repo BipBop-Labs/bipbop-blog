@@ -49,9 +49,21 @@ flowchart TB
 
 En 20 preguntas de Puerto Varas, **los tokens de entrada bajaron 43 % y el costo 38 %**, con prácticamente la misma tasa de aprobación: 18,5 de 20 contra 19. Donde más se filtra es en los planes reguladores (a.k.a. PRC): de diez fragmentos por búsqueda, suelen servir dos.
 
-## Lo que viene
+## Lo que no funcionó
 
-Estamos probando atacar el uso de tokens en otros dos lados. Antes de llamar una herramienta (tenemos varias para especificar normas o lecturas), que Jev decida qué herramientas usar según la tarea y el estado del agente. Por otro lado, en conversaciones largas, que descarte los resultados de herramientas que ya no sirven para lo que el usuario pregunta ahora. Todavía no tenemos números, primero necesitamos evaluaciones con conversaciones de varias preguntas.
+También probamos Jev en dos lugares más, con conversaciones y expedientes reales de Revi. Ninguno salió como esperábamos.
+
+### Elegir herramientas
+
+El agente de Revi tiene unas 50 herramientas, y probamos que Jev eligiera cuál usar en cada paso. Le achuntó a la misma que eligió el agente solo 4 de cada 10 veces, menos que si siempre respondiera sin usar ninguna. Y cuando sí había que usar una, acertó menos de 2 de cada 10.
+
+También probamos algo más fácil: que Jev solo dijera si un mensaje se puede responder sin buscar nada, como cuando el usuario pide un resumen. Para no saltarse nunca una búsqueda que hacía falta, reconoció solo 12 de los 71 mensajes que se podían responder sin buscar.
+
+### Podar el historial
+
+Los subagentes que revisan un expediente leen en cada paso todo lo que trajeron sus herramientas antes, aunque ya no les sirva. Probamos que Jev decidiera qué botar.
+
+No sirvió: los tokens no bajaron y el costo subió 7 %. Y revisó un poco peor: revisamos 15 ítems de expedientes reales, 3 veces cada uno, y comparamos con lo que observó el revisor de la DOM. Sin Jev coincidieron 24 de esas 45 revisiones; con Jev, 21.
 
 ---
 
