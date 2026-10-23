@@ -52,4 +52,4 @@ No sirvió: los tokens no bajaron y el costo subió 7 %. Y revisó un poco peor:
 
 ---
 
-Si estás haciendo agentes, revisa cuántas de tus llamadas al LLM son en verdad una elección entre opciones que ya conoces. O haz copycat de lo que hicimos: si usas RAG, filtra los resultados con Jev o algo similar, y si necesitas clasificar cosas, Jev es una salida muy fácil y rápida.
+Si estás haciendo agentes, inspírate de lo que hicimos y de lo que han hecho otros, y prueba qué se te ocurre para tu problema. O haz copycat de lo que hicimos: si usas RAG, filtra los resultados con Jev o algo similar, y si necesitas clasificar cosas, Jev es una salida muy fácil y rápida. Pero prueba: la única forma de quitar el hype es probando.
