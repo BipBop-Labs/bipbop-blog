@@ -48,7 +48,7 @@ También probamos algo más fácil: que Jev solo dijera si un mensaje se puede r
 
 Los subagentes que revisan un expediente leen en cada paso todo lo que trajeron sus herramientas antes, aunque ya no les sirva. Probamos que Jev decidiera qué botar.
 
-No sirvió: los tokens no bajaron y el costo subió 7 %. Y revisó un poco peor: revisamos 15 ítems de expedientes reales, 3 veces cada uno, y comparamos con lo que observó el revisor de la DOM. Sin Jev coincidieron 24 de esas 45 revisiones; con Jev, 21.
+No sirvió: los tokens no bajaron y el costo subió 7 %. Y revisó un poco peor: revisamos 15 ítems de expedientes reales, 3 veces cada uno, y vimos si Revi encontraba los mismos problemas que había marcado el revisor de la municipalidad. Sin Jev le achuntó en 24 de esas 45 revisiones; con Jev, en 21.
 
 ---
 
