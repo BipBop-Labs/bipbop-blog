@@ -14,7 +14,7 @@ Si te interesa saber más sobre esto, pídele a tu ChatGPT o a Claudito que te e
 
 ## Dónde lo usamos en Revi
 
-En Revi, obviamente, no nos queríamos quedar atrás. Y el patrón es fácil de reconocer: cada vez que le pedimos a un LLM que elija entre opciones que ya conocemos, ahí puede ir Jev. Así que buscamos esos lugares y probamos meterlo.
+En Revi, obviamente, no nos queríamos quedar atrás. Así que, inspirados por cosas que vimos en Twitter, comenzamos a ver dónde lo metíamos nosotros.
 
 ### Reconocer documentos
 
