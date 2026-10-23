@@ -28,20 +28,7 @@ Cuando alguien pregunta por normativa, el agente busca en una base vectorial con
 
 Ahora, después de cada búsqueda, Jev revisa fragmento por fragmento si ayuda a responder la pregunta, y solo pasan los que sí:
 
-```mermaid
-flowchart TB
-  subgraph antes [Antes]
-    direction LR
-    a1[LLM] --> a2[Llamada al tool de RAG] --> a3[Respuesta con todos los fragmentos]
-  end
-  subgraph ahora [Ahora]
-    direction LR
-    b1[LLM] --> b2[Llamada al tool de RAG] --> b3[Filtro con Jev] --> b4[Respuesta con los fragmentos relevantes]
-  end
-  antes ~~~ ahora
-  classDef jev fill:#e3ebd9,stroke:#3d7a3a,color:#2f5f2d
-  class b3 jev
-```
+![Antes y ahora. Antes: el LLM llama al tool de RAG y los 10 fragmentos que devuelve la búsqueda llegan todos al modelo. Ahora: los 10 fragmentos pasan primero por Jev, que descarta 3, y llegan 7 al modelo.](antes-ahora-jev.gif)
 
 ![Un turno real de Revi: a la pregunta "¿Cuál es la altura máxima de edificación en Puerto Varas?", la búsqueda en el PRC de Puerto Varas devolvió 10 fragmentos. Jev deja pasar 7 (normas de edificación 0,98, zonas del plan 0,96, normas de la zona ZEC 0,89, antejardines 0,40, cuadros de la zona ZC 0,33, índice de artículos 0,30 y áreas de protección 0,22) y descarta 3 (parque urbano 0,07, riesgo de remoción en masa 0,05 y circulaciones 0,03).](jev-filtra-busqueda.png "Un turno real: de los 10 fragmentos que trajo la búsqueda, pasan los que tienen 0,2 o más. Jev tardó 0,6 segundos.")
 
