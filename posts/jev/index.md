@@ -1,6 +1,6 @@
 # Jevi: Jev bajó el 38% de gasto en Revi
 
-La semana del 18 (de septiembre), probablemente mientras te comías una empanada, se lanzó Jev. Un modelo que abrió un submundo para todos los que estamos trabajando desarrollando agentes.
+La semana del 18 (de septiembre), mientras me comía una empanada, se lanzó Jev. Un modelo que abrió un submundo para todos los que estamos trabajando desarrollando agentes.
 
 ## ¿Quién es Jev?
 
@@ -24,7 +24,7 @@ Un expediente de permiso de edificación trae decenas de archivos. Para empezar,
 
 ### Filtrar la normativa
 
-Cuando alguien pregunta por normativa, el agente busca en una base vectorial con la LGUC, la OGUC, los planes reguladores y las DDU (circulares). Como sabrás, esto es un RAG de toda la vida (3 años). Cada búsqueda trae varios fragmentos y todos entran al contexto, sirvan o no. La entrada del LLM es casi todo nuestro gasto: en nuestros evals, 4,3 millones de tokens de entrada contra 45 mil de salida.
+Cuando alguien pregunta por normativa, el agente busca en una base vectorial con la LGUC, la OGUC, los planes reguladores y las DDU (circulares). Esto es un RAG de toda la vida (3 años). Cada búsqueda trae varios fragmentos y todos entran al contexto, sirvan o no. La entrada del LLM es casi todo nuestro gasto: en nuestros evals, 4,3 millones de tokens de entrada contra 45 mil de salida.
 
 Ahora, después de cada búsqueda, Jev revisa fragmento por fragmento si ayuda a responder la pregunta, y solo pasan los que sí:
 
@@ -52,4 +52,4 @@ No sirvió: los tokens no bajaron y el costo subió 7 %. Y revisó un poco peor:
 
 ---
 
-Si estás haciendo agentes, inspírate de lo que hicimos y de lo que han hecho otros, y prueba qué se te ocurre para tu problema. O haz copycat de lo que hicimos: si usas RAG, filtra los resultados con Jev o algo similar, y si necesitas clasificar cosas, Jev es una salida muy fácil y rápida. Pero prueba: la única forma de quitar el hype es probando.
+Lo que nos funcionó fue mirar lo que hacían otros, copiar lo que calzaba con nuestro problema y probarlo. Así llegamos al filtro del RAG y a la detección de documentos, y así también descubrimos lo que no servía. Con Jev, como con cualquier modelo nuevo, la única forma de quitarle el hype fue probándolo.
