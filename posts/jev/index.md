@@ -1,4 +1,4 @@
-# Jevi: Jev bajó el 38% de gasto en Revi
+# Jevi: Jev bajó el 38% del costo en Revi
 
 La semana del 18 (de septiembre), mientras me comía una empanada, se lanzó Jev. Un modelo que abrió un submundo para todos los que estamos trabajando desarrollando agentes.
 

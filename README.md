@@ -56,6 +56,9 @@ Markdown normal (tablas, bloques de código, listas, citas).
   enlace. Si falta, se usa el primer párrafo.
 - `draft`: con `true` el post se ve solo con el enlace directo, con un marco
   rojo, y no aparece en `/blog` ni en buscadores. Para publicar, se borra.
+- `aliases`: opcional. Las URLs que tuvo el post antes de cambiarle el
+  título (`["titulo-viejo"]`), para que los enlaces ya compartidos redirijan
+  a la nueva.
 - `date`: opcional (`"2026-09-22"`). Sin esto, la fecha es la del primer
   commit de `index.md`.
 
