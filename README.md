@@ -35,6 +35,8 @@ Markdown normal (tablas, bloques de código, listas, citas).
   y se dibujan con los colores del sitio. Para destacar un nodo en verde:
   `classDef jev fill:#e3ebd9,stroke:#3d7a3a,color:#2f5f2d` y `class nodo jev`.
   Si el diagrama tiene un error de sintaxis, se muestra como texto.
+- Al compartir el enlace se muestra la primera imagen del post. Si la carpeta
+  trae un `og.png` (1200 × 630), se usa ese en su lugar.
 - Lo que falta confirmar antes de publicar se escribe `[TODO: qué falta]` y
   sale marcado en rojo.
 - El HTML suelto no se interpreta: se muestra como texto.
