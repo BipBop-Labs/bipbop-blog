@@ -26,7 +26,7 @@ Son muestras chicas y es correlación, no causa: quien ya usa mucho Núcleo prob
 
 Ahora, cómo está hecho: la parte que Bedrock nos regala y la parte que tuvimos que resolver nosotros, que es casi toda UX.
 
-## Bedrock te da la cita casi gratis
+## Con Bedrock de AWS fue bastante sencillo
 
 Los documentos de la Cámara viven en SharePoint (y algunos en Notion). Un job los sincroniza a S3 y de ahí a una Knowledge Base de Amazon Bedrock, que los parsea con Bedrock Data Automation (BDA), los corta en chunks y los indexa.
 
@@ -58,7 +58,7 @@ Con esto, el backend ya está resuelto: de cada respuesta sabemos de qué archiv
 
 ## Lo difícil es la UX
 
-### Del resaltado a la página exacta
+### Cómo obtenemos la página exacta
 
 Al hacer clic se abre el documento. Para PDFs lo renderizamos con pdf.js, saltamos a la página que dio Bedrock y resaltamos el pasaje en el mismo naranja que en la respuesta, para que se lea como una sola cosa.
 
@@ -96,11 +96,11 @@ normalize(chunk).includes(normalize(ítem))  →  true   ("construccion creceria
 
 Los ítems de menos de 8 caracteres ("de", "2025", "%") se ignoran: aparecen en cualquier chunk y resaltarían media página suelta. Y cuando el documento no trae número de página, recorremos el PDF y abrimos la página con más texto coincidente.
 
-No es perfecto. Es coincidencia por contención, no fuzzy: si el PDF corta una palabra a mitad de ítem, ese trozo no se resalta. En la práctica el pasaje se ve igual, y a futuro podríamos alinear el texto con algo como la [distancia Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance) si lo llegasemos a necesitar.
+No es perfecto. Es coincidencia por contención, no fuzzy: si el PDF corta una palabra a mitad de ítem, ese trozo no se resalta. En la práctica el pasaje se ve igual, y a futuro podríamos alinear el texto con algo como la [distancia Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance) si lo llegásemos a necesitar.
 
 Además de PDFs, los Word, Excel y PowerPoint se abren en vista previa, y cuando una cifra sale de una consulta SQL a la base de datos del Área de Estudios, esa consulta también queda citada.
 
-## Pensámos que esto es lo mínimo
+## Pensamos que esto es lo mínimo
 
 En BipBop creemos que la visibilidad y transparencia de lo que "está pasando detrás" es clave para ofrecer una UX satisfactoria. El hecho de que toda esta trazabilidad esté a un click de distancia nos acerca hacia una retención y engagement saludable con las plataformas que desarrollamos.
 
