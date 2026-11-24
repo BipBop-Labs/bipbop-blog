@@ -1,4 +1,4 @@
-# Orquestar agentes en la Platanus Hack
+# Slop Factory: orquestando agentes en la Platanus Hack
 
 Cómo ganamos nuestro track y *casi* la Platanus Hack 26 de Santiago
 
