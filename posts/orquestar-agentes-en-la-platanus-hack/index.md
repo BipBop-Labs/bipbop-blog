@@ -1,6 +1,6 @@
 # Orquestar agentes en la Platanus Hack
 
-Cómo *casi* ganamos la Platanus Hack 26 de Santiago
+Cómo ganamos nuestro track y *casi* la Platanus Hack 26 de Santiago
 
 El fin de semana pasado fuimos con el equipo a participar de la [Platanus Hack](https://hack.platan.us/26-cl).
 
@@ -58,7 +58,7 @@ El video muestra cómo avanzó la hack hora por hora. Arriba se acumulan las PRs
 
 La primera noche les dejamos el goal corriendo, y en las seis horas que dormimos ya lograron como juntar 282 fuentes en el catálogo y recuperar millones de datos [TODO: no pude verificar el volumen; data/raw no está en git].
 
-Y también surgieron cosas como que los agentes mismos decidieron cómo usar Python para hacer todo esto de scrapers y cosas y recolectar datos [TODO: la regla "Use only the Python standard library" está en context/research/sources/README.md, commiteada desde la sesión de Emerson; confirmar que la eligió un agente y no una persona], y además optaron por una versión web del visualizador de Santiago que no imaginábamos, que después terminamos pivoteando a Rust para que pudiera correr con la fluidez que necesitábamos.
+Y también surgieron cosas como que los agentes mismos decidieron cómo usar Python para hacer todo esto de scrapers y cosas y recolectar datos, y además optaron por una versión web del visualizador de Santiago que no imaginábamos, que después terminamos pivoteando a Rust para que pudiera correr con la fluidez que necesitábamos.
 
 Los agentes también decidieron armar un CI/CD para verificar que el código en Rust compilara. Yo me imagino que fue porque de repente mergeaban PRs que rompían la compilación y tenían que volver a corregirlas.
 
