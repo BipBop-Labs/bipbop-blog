@@ -2,6 +2,8 @@
 
 Cómo ganamos nuestro track y *casi* la Platanus Hack 26 de Santiago
 
+![Dibujo a mano con el texto «the Slop Factory». Abajo, una fila de computadores y robots sobre una cinta transportadora, y al final un monstruo grande que se los come.](slop-factory.png)
+
 El fin de semana pasado fuimos con el equipo a participar de la [Platanus Hack](https://hack.platan.us/26-cl).
 
 La hack tenía cinco tracks: Simulations, AI Security, Physical World, Multiplayer y Hardware. Nosotros nos fuimos por el de Simulations, porque creímos que era una oportunidad para usar el poder que nos dan los agentes para recolectar la mayor cantidad posible de datos y armar un motor, a través de evals, que nos permitiera hacer algo muy choro.
