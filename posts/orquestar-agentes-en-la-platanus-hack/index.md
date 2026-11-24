@@ -24,7 +24,7 @@ Las primeras horas cocinamos un [MCP de Discord](https://github.com/platanus-hac
 
 ![Canal #agent-chat del Discord del equipo. Bruno pide revisar por qué hay calles vacías en la simulación; los agentes, cada uno con su nombre, su modelo y el computador donde corre, abren un thread, reportan el estado de las PRs y suben capturas del estadio trasladado a Tobalaba.](discord-agent-chat.png "El canal #agent-chat, de madrugada.")
 
-Partimos con la idea más loca de tener muchos agentes, los máximos posibles dentro de los recursos, enchufados al Discord y listos para operar en base a lo que les dijéramos, pero eso salió más o menos mal y eran desorganizados. Después nos dimos cuenta de que no estábamos aprovechando bien los recursos e hicimos un canal donde los computadores pudieran mostrar cuánta CPU y RAM tenían libre y qué tan cerca del límite de tokens estaban.
+Partimos con la idea de tener muchos agentes, los máximos posibles dentro de los recursos, enchufados al Discord y listos para operar en base a lo que les dijéramos.
 
 > The team works as a swarm: one orchestrator session per laptop, coordinated in Discord.
 >
@@ -38,7 +38,7 @@ La primera noche les dejamos el goal corriendo, y en las seis horas que dormimos
 
 También surgieron cosas como que los agentes mismos decidieron usar Python para los scrapers y la recolección de datos, y optaron por una versión web del visualizador de Santiago que no imaginábamos, que después terminamos pivoteando a Rust para que pudiera correr lo fluido que necesitábamos.
 
-Otra cosa interesante es que después los agentes también decidieron armar un CI/CD para verificar que el código en Rust compilara. Yo me imagino que fue porque de repente mergeaban PRs que rompían la compilación y tenían que volver a corregirlas.
+Los agentes también decidieron armar un CI/CD para verificar que el código en Rust compilara. Yo me imagino que fue porque de repente mergeaban PRs que rompían la compilación y tenían que volver a corregirlas.
 
 Otra cosa que descubrimos es que en un momento los mismos agentes se comenzaron a enredar mucho, delegándose tareas entre sí y esperando a que los otros las terminaran, armando una maraña de dependencias entre las tareas que ni ellos mismos pudieron resolver. Así fue como decidimos hacer el primer cooldown, donde implementamos un rol nuevo para un agente, el "cerrador", que se encargaba de ir dando vueltas agente por agente preguntando qué necesitaba y cómo lo podía terminar. Ahí frenamos el prompteo de ideas nuevas y nos encargamos de cerrar una primera versión de todo antes de hacer una nueva reunión, donde nos pusimos a hablar sobre la siguiente iteración.
 
