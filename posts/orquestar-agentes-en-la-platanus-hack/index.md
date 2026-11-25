@@ -56,8 +56,6 @@ El video muestra cómo avanzó la hack hora por hora. Arriba se acumulan las PRs
 
 ![Animación de la hack, del viernes en la noche al domingo a las 9:00. Arriba, cinco curvas de actividad, con las PRs mergeadas en verde. Abajo, los nombres y las líneas de los agentes en las filas de sus computadores, con un contador en cada fila. De fondo se marcan las fases: setup del enjambre, primer enjambre, cooldown, las 5 verticales y pulido del pitch.](la-hack-hora-por-hora.mp4 "El registro de Discord del gráfico superior llega hasta el domingo a las 3:23.")
 
-![Árbol de pedidos que parte en Nilda-08, del computador de Vicente, a las 11:13 del sábado. Nilda-08 le pide algo a swift-condor, de Bruno, que le pide cosas a ocho agentes de Emerson. Desde gentle-fox la cadena sigue por Cecilia-77, América-96, Violeta-77 y Atilio-47 hasta agentes de Juan y de Mac a las 13:18, seis niveles más abajo y con 29 agentes involucrados.](cadena-de-pedidos.png)
-
 ## Cosas que descubrimos
 
 La primera noche les dejamos el goal corriendo, y en las seis horas que dormimos ya lograron como juntar 282 fuentes en el catálogo y recuperar millones de datos.
