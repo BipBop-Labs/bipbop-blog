@@ -64,10 +64,12 @@ Y también surgieron cosas como que los agentes mismos decidieron cómo usar Pyt
 
 Los agentes también decidieron armar un CI/CD para verificar que el código en Rust compilara. Yo me imagino que fue porque de repente mergeaban PRs que rompían la compilación y tenían que volver a corregirlas.
 
-Descubrimos que en un momento los mismos agentes se comenzaron a enredar mucho, delegándose tareas entre sí y esperando a que los otros las terminaran, armando una maraña de dependencias entre las tareas que ni ellos mismos pudieron resolver. 
+Descubrimos que en un momento los mismos agentes se comenzaron a enredar mucho, delegándose tareas entre sí y esperando a que los otros las terminaran, armando una maraña de dependencias entre las tareas que ni ellos mismos pudieron resolver.
 
-![Barras apiladas con las cadenas de pedidos que partieron cada hora, del sábado a la 1:00 al domingo a las 8:00, separadas por niveles. Las cadenas de 4 a 8 niveles parten todas entre las 2:00 y las 12:00 del sábado. Desde las 13:00 casi todas son de 1 o 2 niveles, y después del cooldown, a las 16:40, ninguna pasa de 3.](profundidad-de-cadenas.png)
+![Árbol de pedidos que parte en Nilda-08, del computador de Vicente, a las 11:13 del sábado. Nilda-08 le pide algo a swift-condor, de Bruno, que le pide cosas a ocho agentes de Emerson. Desde gentle-fox la cadena sigue por Cecilia-77, América-96, Violeta-77 y Atilio-47 hasta agentes de Juan y de Mac a las 13:18, seis niveles más abajo y con 29 agentes involucrados.](cadena-de-pedidos.png)
 
 Así fue como decidimos hacer el primer cooldown, donde implementamos un rol nuevo para un agente, el "cerrador", que se encargaba de ir dando vueltas agente por agente preguntando qué necesitaba y cómo lo podía terminar.
 
 Frenamos el prompteo de ideas nuevas y nos encargamos de cerrar una primera versión de todo antes de hacer una nueva reunión, donde nos pusimos a hablar sobre la siguiente iteración.
+
+![Barras apiladas con las cadenas de pedidos que partieron cada hora, del sábado a la 1:00 al domingo a las 8:00, separadas por niveles. Las cadenas de 4 a 8 niveles parten todas entre las 2:00 y las 12:00 del sábado. Desde las 13:00 casi todas son de 1 o 2 niveles, y después del cooldown, a las 16:40, ninguna pasa de 3.](profundidad-de-cadenas.png)
